@@ -27,24 +27,65 @@ function playRound(playerSelection, computerSelection) {
 	if (playerSelection === computerSelection) {
 		return 'Draw!';
 	} else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+		playerScore++;
 		return 'You Win!';
 	} else if (playerSelection === 'paper' && computerSelection === 'rock') {
+		playerScore++;
 		return 'You Win!';
 	} else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+		playerScore++;
 		return 'You Win!';
 	} else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-		return 'You Lose!';
+		if(playerScore !== 0) {
+			playerScore--;
+			computerScore++;
+			return 'You Lose!';
+		} else {
+			return 'You Lose!';
+			computerScore++;
+		}
 	} else if (playerSelection === 'rock' && computerSelection === 'paper') {
-		return 'You Lose!';
+		if(playerScore !== 0) {
+			playerScore--;
+			computerScore++;
+			return 'You Lose!';
+		} else {			
+			return 'You Lose!';
+			computerScore++;
+		}
 	} else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-		return 'You Lose!';
+		if(playerScore !== 0) {
+			playerScore--;
+			computerScore++;
+			return 'You Lose!';
+		} else {
+			return 'You Lose!';
+			computerScore++;
+		}
 	} else {
 		return 'That\'s not allowed!!';
 	}
 }
 
+function game (){
+	//log scores
+	console.log("Player: " + playerScore + " vs " + "Computer: " + computerScore)
+	//collect player selection 
+	let player= prompt("Rock, Paper or Scissors");
+	//Run and log round 
+	console.log(playRound(player, computerPlay()))
+}
+// Keep playing game until 5 games have been played
+while ((playerScore+computerScore) !== 5){
+	game()
+}
+//Find who is winner
+let winner = (playerScore>computerScore)? "You win" : "You Lose"
+//Log last scores 
+console.log("Player: " + playerScore + " vs " + "Computer: " + computerScore);
+//Announce winner
+console.log(winner);
 
-playerSelection = window.prompt("Rock, Paper, or Scissors?").toLowerCase();
 const computerSelection = computerPlay()
 console.log(playRound(playerSelection, computerSelection))
 </script>
